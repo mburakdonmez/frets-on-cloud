@@ -14,7 +14,7 @@
     "preview": "next build && next start",
     "start": "next start",
     "typecheck": "tsc --noEmit",
-    "typegen": "bunx supabase gen types typescript --project-id \"qmcxcjdckuhegqmmizhg\" --schema public > src/database.types.ts && prettier --write \"src/database.types.ts\""
+    "typegen": "bunx supabase gen types typescript --project-id \"sbyxxegqzwqhxzibbtvx\" --schema public > src/database.types.ts && prettier --write \"src/database.types.ts\""
   },
   "dependencies": {
     "@heroicons/react": "^2.2.0",

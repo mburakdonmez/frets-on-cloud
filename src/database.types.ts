@@ -1,71 +1,9 @@
-export type Json =
-  | string
-  | number
-  | boolean
-  | null
-  | { [key: string]: Json | undefined }
-  | Json[];
+export type Json = string | number | boolean | null | { [key: string]: Json | undefined } | Json[];
 
 export type Database = {
   public: {
     Tables: {
-      mcp_servers: {
-        Row: {
-          auth_token: string | null;
-          auth_type: Database["public"]["Enums"]["auth_type"];
-          created_at: string;
-          id: number;
-          name: string;
-          oauth_access_token: string | null;
-          oauth_authorization_server: string | null;
-          oauth_client_id: string | null;
-          oauth_client_secret: string | null;
-          oauth_metadata: Json | null;
-          oauth_refresh_token: string | null;
-          oauth_token_expires_at: string | null;
-          transport: Database["public"]["Enums"]["mcp_transport"];
-          uid: string;
-          url: string;
-          version: string;
-        };
-        Insert: {
-          auth_token?: string | null;
-          auth_type?: Database["public"]["Enums"]["auth_type"];
-          created_at?: string;
-          id?: number;
-          name: string;
-          oauth_access_token?: string | null;
-          oauth_authorization_server?: string | null;
-          oauth_client_id?: string | null;
-          oauth_client_secret?: string | null;
-          oauth_metadata?: Json | null;
-          oauth_refresh_token?: string | null;
-          oauth_token_expires_at?: string | null;
-          transport: Database["public"]["Enums"]["mcp_transport"];
-          uid?: string;
-          url: string;
-          version: string;
-        };
-        Update: {
-          auth_token?: string | null;
-          auth_type?: Database["public"]["Enums"]["auth_type"];
-          created_at?: string;
-          id?: number;
-          name?: string;
-          oauth_access_token?: string | null;
-          oauth_authorization_server?: string | null;
-          oauth_client_id?: string | null;
-          oauth_client_secret?: string | null;
-          oauth_metadata?: Json | null;
-          oauth_refresh_token?: string | null;
-          oauth_token_expires_at?: string | null;
-          transport?: Database["public"]["Enums"]["mcp_transport"];
-          uid?: string;
-          url?: string;
-          version?: string;
-        };
-        Relationships: [];
-      };
+      [_ in never]: never;
     };
     Views: {
       [_ in never]: never;
@@ -74,12 +12,7 @@ export type Database = {
       [_ in never]: never;
     };
     Enums: {
-      auth_type: "none" | "token" | "oauth";
-      mcp_transport:
-        | "SSEClientTransport"
-        | "StreamableHTTPClientTransport"
-        | "WebSocketClientTransport"
-        | "StdioClientTransport";
+      [_ in never]: never;
     };
     CompositeTypes: {
       [_ in never]: never;
@@ -106,10 +39,8 @@ export type Tables<
     }
     ? R
     : never
-  : DefaultSchemaTableNameOrOptions extends keyof (DefaultSchema["Tables"] &
-        DefaultSchema["Views"])
-    ? (DefaultSchema["Tables"] &
-        DefaultSchema["Views"])[DefaultSchemaTableNameOrOptions] extends {
+  : DefaultSchemaTableNameOrOptions extends keyof (DefaultSchema["Tables"] & DefaultSchema["Views"])
+    ? (DefaultSchema["Tables"] & DefaultSchema["Views"])[DefaultSchemaTableNameOrOptions] extends {
         Row: infer R;
       }
       ? R
@@ -117,9 +48,7 @@ export type Tables<
     : never;
 
 export type TablesInsert<
-  DefaultSchemaTableNameOrOptions extends
-    | keyof DefaultSchema["Tables"]
-    | { schema: keyof Database },
+  DefaultSchemaTableNameOrOptions extends keyof DefaultSchema["Tables"] | { schema: keyof Database },
   TableName extends DefaultSchemaTableNameOrOptions extends {
     schema: keyof Database;
   }
@@ -140,9 +69,7 @@ export type TablesInsert<
     : never;
 
 export type TablesUpdate<
-  DefaultSchemaTableNameOrOptions extends
-    | keyof DefaultSchema["Tables"]
-    | { schema: keyof Database },
+  DefaultSchemaTableNameOrOptions extends keyof DefaultSchema["Tables"] | { schema: keyof Database },
   TableName extends DefaultSchemaTableNameOrOptions extends {
     schema: keyof Database;
   }
@@ -163,9 +90,7 @@ export type TablesUpdate<
     : never;
 
 export type Enums<
-  DefaultSchemaEnumNameOrOptions extends
-    | keyof DefaultSchema["Enums"]
-    | { schema: keyof Database },
+  DefaultSchemaEnumNameOrOptions extends keyof DefaultSchema["Enums"] | { schema: keyof Database },
   EnumName extends DefaultSchemaEnumNameOrOptions extends {
     schema: keyof Database;
   }
@@ -178,9 +103,7 @@ export type Enums<
     : never;
 
 export type CompositeTypes<
-  PublicCompositeTypeNameOrOptions extends
-    | keyof DefaultSchema["CompositeTypes"]
-    | { schema: keyof Database },
+  PublicCompositeTypeNameOrOptions extends keyof DefaultSchema["CompositeTypes"] | { schema: keyof Database },
   CompositeTypeName extends PublicCompositeTypeNameOrOptions extends {
     schema: keyof Database;
   }
@@ -194,14 +117,6 @@ export type CompositeTypes<
 
 export const Constants = {
   public: {
-    Enums: {
-      auth_type: ["none", "token", "oauth"],
-      mcp_transport: [
-        "SSEClientTransport",
-        "StreamableHTTPClientTransport",
-        "WebSocketClientTransport",
-        "StdioClientTransport",
-      ],
-    },
+    Enums: {},
   },
 } as const;
