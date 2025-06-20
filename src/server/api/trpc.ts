@@ -47,8 +47,7 @@ const t = initTRPC.context<typeof createTRPCContext>().create({
       ...shape,
       data: {
         ...shape.data,
-        zodError:
-          error.cause instanceof ZodError ? error.cause.flatten() : null,
+        zodError: error.cause instanceof ZodError ? error.cause.flatten() : null,
       },
     };
   },
@@ -113,6 +112,4 @@ const protectedMiddleware = t.middleware(async (options) => {
  * are logged in.
  */
 export const publicProcedure = t.procedure.use(timingMiddleware);
-export const protectedProcedure = t.procedure
-  .use(timingMiddleware)
-  .use(protectedMiddleware);
+export const protectedProcedure = t.procedure.use(timingMiddleware).use(protectedMiddleware);

@@ -5,10 +5,7 @@ import { useEffect, useState, type ReactNode } from "react";
 import type { Database } from "@/database.types";
 
 export const createClient = () =>
-  createBrowserClient<Database>(
-    process.env.NEXT_PUBLIC_SUPABASE_URL!,
-    process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY!,
-  );
+  createBrowserClient<Database>(process.env.NEXT_PUBLIC_SUPABASE_URL!, process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY!);
 
 export function ProtectedRoute(props: { children: ReactNode }) {
   const [isLoading, setIsLoading] = useState(true);
