@@ -3,7 +3,181 @@ export type Json = string | number | boolean | null | { [key: string]: Json | un
 export type Database = {
   public: {
     Tables: {
-      [_ in never]: never;
+      Album: {
+        Row: {
+          artist: number;
+          cover: string;
+          created_at: string;
+          duration: number;
+          explicit_lyrics: boolean;
+          id: number;
+          label: string;
+          record_type: string;
+          release_date: string;
+          title: string;
+          upc: string;
+        };
+        Insert: {
+          artist: number;
+          cover: string;
+          created_at?: string;
+          duration: number;
+          explicit_lyrics: boolean;
+          id?: number;
+          label: string;
+          record_type: string;
+          release_date: string;
+          title: string;
+          upc: string;
+        };
+        Update: {
+          artist?: number;
+          cover?: string;
+          created_at?: string;
+          duration?: number;
+          explicit_lyrics?: boolean;
+          id?: number;
+          label?: string;
+          record_type?: string;
+          release_date?: string;
+          title?: string;
+          upc?: string;
+        };
+        Relationships: [
+          {
+            foreignKeyName: "Album_artist_fkey";
+            columns: ["artist"];
+            isOneToOne: false;
+            referencedRelation: "Artist";
+            referencedColumns: ["id"];
+          },
+        ];
+      };
+      Artist: {
+        Row: {
+          created_at: string;
+          id: number;
+          name: string;
+          nb_album: number | null;
+          picture: string;
+        };
+        Insert: {
+          created_at?: string;
+          id?: number;
+          name: string;
+          nb_album?: number | null;
+          picture?: string;
+        };
+        Update: {
+          created_at?: string;
+          id?: number;
+          name?: string;
+          nb_album?: number | null;
+          picture?: string;
+        };
+        Relationships: [];
+      };
+      Songs: {
+        Row: {
+          created_at: string;
+          created_by: string;
+          id: string;
+          track: number;
+        };
+        Insert: {
+          created_at?: string;
+          created_by: string;
+          id?: string;
+          track: number;
+        };
+        Update: {
+          created_at?: string;
+          created_by?: string;
+          id?: string;
+          track?: number;
+        };
+        Relationships: [
+          {
+            foreignKeyName: "Songs_track_fkey";
+            columns: ["track"];
+            isOneToOne: false;
+            referencedRelation: "Track";
+            referencedColumns: ["id"];
+          },
+        ];
+      };
+      Track: {
+        Row: {
+          album: number;
+          artist: number;
+          bpm: number;
+          created_at: string;
+          disk_number: number;
+          duration: number;
+          explicit_lyrics: boolean;
+          gain: number;
+          id: number;
+          isrc: string;
+          preview: string;
+          release_date: string;
+          title: string;
+          title_short: string;
+          title_version: string;
+          track_token: string;
+        };
+        Insert: {
+          album: number;
+          artist: number;
+          bpm: number;
+          created_at?: string;
+          disk_number: number;
+          duration: number;
+          explicit_lyrics: boolean;
+          gain: number;
+          id?: number;
+          isrc: string;
+          preview: string;
+          release_date: string;
+          title: string;
+          title_short: string;
+          title_version: string;
+          track_token: string;
+        };
+        Update: {
+          album?: number;
+          artist?: number;
+          bpm?: number;
+          created_at?: string;
+          disk_number?: number;
+          duration?: number;
+          explicit_lyrics?: boolean;
+          gain?: number;
+          id?: number;
+          isrc?: string;
+          preview?: string;
+          release_date?: string;
+          title?: string;
+          title_short?: string;
+          title_version?: string;
+          track_token?: string;
+        };
+        Relationships: [
+          {
+            foreignKeyName: "Track_album_fkey";
+            columns: ["album"];
+            isOneToOne: false;
+            referencedRelation: "Album";
+            referencedColumns: ["id"];
+          },
+          {
+            foreignKeyName: "Track_artist_fkey";
+            columns: ["artist"];
+            isOneToOne: false;
+            referencedRelation: "Artist";
+            referencedColumns: ["id"];
+          },
+        ];
+      };
     };
     Views: {
       [_ in never]: never;

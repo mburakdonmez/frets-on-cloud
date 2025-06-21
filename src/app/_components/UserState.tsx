@@ -12,7 +12,10 @@ export function UserState() {
 
   useEffect(() => {
     void client.auth.getUser().then(({ data: { user } }) => {
-      if (user) setUser({ email: user.email, id: user.id });
+      if (user) {
+        if (!user.email) throw new Error(`Email doesn't exist for user ${user.id}`);
+        setUser({ email: user.email, id: user.id });
+      }
       setLoading(false);
     });
 
@@ -20,8 +23,10 @@ export function UserState() {
     const {
       data: { subscription },
     } = client.auth.onAuthStateChange((_event, session) => {
-      if (session?.user) setUser({ email: session.user.email, id: session.user.id });
-      else setUser(null);
+      if (session?.user) {
+        if (!session.user.email) throw new Error(`Email doesn't exist for user ${session.user.id}`);
+        setUser({ email: session.user.email, id: session.user.id });
+      } else setUser(null);
     });
 
     return () => {
